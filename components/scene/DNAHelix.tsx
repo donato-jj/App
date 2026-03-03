@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -130,7 +130,8 @@ export default function DNAHelix() {
   const backboneMeshARef = useRef<THREE.InstancedMesh>(null);
   const backboneMeshBRef = useRef<THREE.InstancedMesh>(null);
 
-  useMemo(() => {
+  // Update backbone instanced mesh matrices when pairData changes
+  useEffect(() => {
     const dummy = new THREE.Object3D();
     [backboneMeshARef, backboneMeshBRef].forEach((ref, strand) => {
       if (!ref.current) return;
@@ -142,7 +143,6 @@ export default function DNAHelix() {
       });
       ref.current.instanceMatrix.needsUpdate = true;
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pairData]);
 
   useFrame((_, delta) => {

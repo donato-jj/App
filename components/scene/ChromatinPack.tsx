@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useAppStore } from "@/src/store/appStore";
@@ -10,9 +10,9 @@ const HISTONE_MAT = new THREE.MeshStandardMaterial({ color: "#a78bfa", roughness
 
 function NucleosomeLevel({ count, radius }: { count: number; radius: number }) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
-  useMemo(() => {
-    const dummy = new THREE.Object3D();
+  useEffect(() => {
     if (!meshRef.current) return;
+    const dummy = new THREE.Object3D();
     for (let i = 0; i < count; i++) {
       const angle = (i / count) * Math.PI * 2;
       dummy.position.set(Math.cos(angle) * radius, (i - count / 2) * 0.7, Math.sin(angle) * radius);
@@ -21,7 +21,6 @@ function NucleosomeLevel({ count, radius }: { count: number; radius: number }) {
       meshRef.current.setMatrixAt(i, dummy.matrix);
     }
     meshRef.current.instanceMatrix.needsUpdate = true;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, radius]);
 
   return (
