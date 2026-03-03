@@ -5,7 +5,7 @@ import { OrbitControls, Stars } from "@react-three/drei";
 import * as THREE from "three";
 import { useAppStore } from "@/src/store/appStore";
 import { chooseDPR } from "@/src/lib/perf";
-import { downloadDataUrl } from "@/src/lib/exporters.js";
+import { downloadDataUrl } from "@/src/lib/exporters";
 import DNAHelix from "./DNAHelix";
 import ChromatinPack from "./ChromatinPack";
 import VoidField from "./VoidField";

@@ -2,7 +2,7 @@
 import { useAppStore } from "@/src/store/appStore";
 import { Select } from "./Select";
 import type { CameraPreset, QualityPreset } from "@/src/types/app";
-import { downloadTextFile } from "@/src/lib/exporters.js";
+import { downloadTextFile } from "@/src/lib/exporters";
 
 export default function TopBar() {
   const cameraPreset = useAppStore((s) => s.scene.cameraPreset);
